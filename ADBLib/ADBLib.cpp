@@ -6,11 +6,10 @@
 #include "ADBLib.h"
 
 ADBCmd* mADBCmd;
-OnReportListener mOnReportListener = NULL;
 void InitADBProcessor(OnReportListener Proc)
 {
 	mADBCmd = new ADBCmd();
-	mOnReportListener = Proc;
+	mADBCmd->SetProc(Proc);
 }
 
 void ADBGetFileListFromDir(char* dir)
@@ -41,4 +40,9 @@ void ADBDelFile(char* filename)
 void ADBClearFile(char* dir, char* filetype)
 {
 	mADBCmd->ExeClearDirFile(dir, filetype);
+}
+
+bool ADBGetState(void)
+{
+	return mADBCmd->ExeGetADBState();
 }
